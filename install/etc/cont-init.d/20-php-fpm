@@ -11,7 +11,6 @@ PHP_ENABLE_CURL=${PHP_ENABLE_CURL:-"TRUE"}
 PHP_ENABLE_LDAP=${PHP_ENABLE_LDAP:-"TRUE"}
 PHP_ENABLE_MBSTRING=${PHP_ENABLE_MBSTRING:-"TRUE"}
 PHP_ENABLE_GETTEXT=${PHP_ENABLE_GETTEXT:-"FALSE"}
-PHP_ENABLE_OPCACHE=${PHP_ENABLE_OPCACHE:-"TRUE"}
 PHP_ENABLE_OPENSSL=${PHP_ENABLE_OPENSSL:-"TRUE"}
 PHP_ENABLE_PHAR=${PHP_ENABLE_PHAR:-"TRUE"}
 PHP_ENABLE_POSIX=${PHP_ENABLE_POSIX:-"FALSE"}
@@ -27,12 +26,6 @@ sed -i -e "s/<PHP_TIMEOUT>/$PHP_TIMEOUT/g" /etc/php7/php.ini
 sed -i -e "s/<UPLOAD_MAX_SIZE>/$UPLOAD_MAX_SIZE/g" /etc/php7/php-fpm.conf
 sed -i -e "s/<UPLOAD_MAX_SIZE>/$UPLOAD_MAX_SIZE/g" /etc/php7/php.ini
 
-# Disable Modules
-if [ "$OPCACHE_MEM_SIZE" = "0" ]; then
-  sed -i -e "s/opcache.enable=1/opcache.enable=0/g" /etc/php7/conf.d/00_opcache.ini
-  sed -i -e "s/opcache.enable_cli=1/opcache.enable_cli=0/g" /etc/php7/conf.d/00_opcache.ini
-fi
-
 # Timezone Config
 echo 'date.timezone='`cat /etc/timezone` >> /etc/php7/conf.d/timezone.ini
 
@@ -44,7 +37,6 @@ echo '** PHP-FPM Preparing to start with the following plugins enabled: '$PHP_PL
 if [ "$PHP_ENABLE_CURL" != "TRUE" ]; then rm -rf /etc/php7/00_curl.ini ; fi;
 if [ "$PHP_ENABLE_LDAP" != "TRUE" ]; then rm -rf /etc/php7/00_ldap.ini ; fi;
 if [ "$PHP_ENABLE_MBSTRING" != "TRUE" ]; then rm -rf /etc/php7/00_mbstring.ini ; fi;
-if [ "$PHP_ENABLE_OPCACHE" != "TRUE" ]; then rm -rf /etc/php7/00_opcache.ini ; fi;
 if [ "$PHP_ENABLE_OPENSSL" != "TRUE" ]; then rm -rf /etc/php7/00_openssl.ini ; fi;
 if [ "$PHP_ENABLE_POSIX" != "TRUE" ]; then  rm -rf /etc/php7/00_posix.ini; fi;
 if [ "$PHP_ENABLE_SESSION" != "TRUE" ]; then rm -rf /etc/php7/00_session.ini ; fi;
