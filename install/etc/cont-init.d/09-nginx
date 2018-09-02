@@ -14,4 +14,4 @@ chown -R nginx /www/logs/nginx
 chown -R nginx /tmp/nginx
 
 mkdir -p /tmp/state
-touch /tmp/state/09-nginx-init
+touch /tmp/state/10-nginx
