@@ -12,7 +12,8 @@ ENV ARGONAUT_VERSION=1.2 \
     INSTANCE=default \
     PHP_ENABLE_GETTEXT=TRUE \
     PHP_ENABLE_IMAGICK=TRUE \
-    PHP_ENABLE_IMAP=TRUE
+    PHP_ENABLE_IMAP=TRUE \
+    PHP_ENABLE_XMLRPC=TRUE
 
 # Dependency Installation
 RUN set -x && \
@@ -35,6 +36,7 @@ RUN set -x && \
     php7-openssl \
     php7-phar\
     php7-posix \
+    php7-xmlrpc \
     php7-session && \
     rm -rf /var/cache/apk/*
 

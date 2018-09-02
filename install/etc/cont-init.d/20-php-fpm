@@ -17,6 +17,7 @@ PHP_ENABLE_POSIX=${PHP_ENABLE_POSIX:-"FALSE"}
 PHP_ENABLE_SESSION=${PHP_ENABLE_SESSION:-"TRUE"}
 PHP_ENABLE_IMAGICK=${PHP_ENABLE_IMAGICK:-"FALSE"}
 PHP_ENABLE_IMAP=${PHP_ENABLE_IMAP:-"TRUE"}
+PHP_ENABLE_XMLRPC=${PHP_ENABLE_XMLRPC:-"FALSE"}
 
 # Adjust PHP Runtime Variables
 sed -i -e "s/<OPCACHE_MEM_SIZE>/$OPCACHE_MEM_SIZE/g" /etc/php7/conf.d/00_opcache.ini
@@ -34,15 +35,16 @@ PHP_PLUGINS_ENABLED=`set -o posix; set | sort | grep PHP_ENABLE_ | grep TRUE |se
 
 echo '** PHP-FPM Preparing to start with the following plugins enabled: '$PHP_PLUGINS_ENABLED
 
-if [ "$PHP_ENABLE_CURL" != "TRUE" ]; then rm -rf /etc/php7/00_curl.ini ; fi;
-if [ "$PHP_ENABLE_LDAP" != "TRUE" ]; then rm -rf /etc/php7/00_ldap.ini ; fi;
-if [ "$PHP_ENABLE_MBSTRING" != "TRUE" ]; then rm -rf /etc/php7/00_mbstring.ini ; fi;
-if [ "$PHP_ENABLE_OPENSSL" != "TRUE" ]; then rm -rf /etc/php7/00_openssl.ini ; fi;
-if [ "$PHP_ENABLE_POSIX" != "TRUE" ]; then  rm -rf /etc/php7/00_posix.ini; fi;
-if [ "$PHP_ENABLE_SESSION" != "TRUE" ]; then rm -rf /etc/php7/00_session.ini ; fi;
-if [ "$PHP_ENABLE_GETTEXT" != "TRUE" ]; then rm -rf /etc/php7/00_gettext.ini; fi;
-if [ "$PHP_ENABLE_IMAGICK" != "TRUE" ]; then rm -rf /etc/php7/imagick.ini ; fi;
-if [ "$PHP_ENABLE_IMAP" != "TRUE" ]; then rm -rf /etc/php7/00_imap.ini ; fi;
+if [ "$PHP_ENABLE_CURL" != "TRUE" ]; then rm -rf /etc/php7/conf.d/00_curl.ini ; fi;
+if [ "$PHP_ENABLE_LDAP" != "TRUE" ]; then rm -rf /etc/php7/conf.d/00_ldap.ini ; fi;
+if [ "$PHP_ENABLE_MBSTRING" != "TRUE" ]; then rm -rf /etc/php7/conf.d/00_mbstring.ini ; fi;
+if [ "$PHP_ENABLE_OPENSSL" != "TRUE" ]; then rm -rf /etc/php7/conf.d/00_openssl.ini ; fi;
+if [ "$PHP_ENABLE_POSIX" != "TRUE" ]; then  rm -rf /etc/php7/conf.d/00_posix.ini; fi;
+if [ "$PHP_ENABLE_SESSION" != "TRUE" ]; then rm -rf /etc/php7/conf.d/00_session.ini ; fi;
+if [ "$PHP_ENABLE_GETTEXT" != "TRUE" ]; then rm -rf /etc/php7/conf.d/00_gettext.ini; fi;
+if [ "$PHP_ENABLE_IMAGICK" != "TRUE" ]; then rm -rf /etc/php7/conf.d/imagick.ini ; fi;
+if [ "$PHP_ENABLE_IMAP" != "TRUE" ]; then rm -rf /etc/php7/conf.d/01_imap.ini ; fi;
+if [ "$PHP_ENABLE_XMLRPC" != "TRUE" ]; then rm -rf /etc/php7/conf.d/01_xmlrpc.ini; fi;
 
 sed -i -e "s/<PHP_LOG_LEVEL>/$PHP_LOG_LEVEL/g" /etc/php7/php-fpm.conf
 
