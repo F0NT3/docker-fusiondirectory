@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv bash
 
-while [ ! -f /tmp/state/99-container-init ]
+while [ ! -f /tmp/state/00-container-initialized ]
 do
   sleep 1
 done
